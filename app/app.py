@@ -47,21 +47,21 @@ st.markdown(
     """
     <style>
     :root {
-        --bg: #080d15;
-        --panel: #101827;
-        --panel-2: #152235;
-        --ink: #e8eef7;
-        --muted: #96a6bb;
-        --line: #26364c;
-        --accent: #58d3e6;
-        --accent-2: #79f2a6;
-        --danger: #ff6b6b;
-        --warn: #f7c948;
+        --bg: #050608;
+        --panel: #0d1016;
+        --panel-2: #151922;
+        --ink: #f1f5f9;
+        --muted: #9aa7b7;
+        --line: #252b36;
+        --accent: #00d4ff;
+        --accent-2: #ffb547;
+        --danger: #ff5d5d;
+        --warn: #f3c258;
     }
     .stApp {
         background:
-            radial-gradient(circle at top left, rgba(88, 211, 230, .13), transparent 34rem),
-            linear-gradient(180deg, #080d15 0%, #0b1320 52%, #070b12 100%);
+            radial-gradient(circle at top left, rgba(0, 212, 255, .12), transparent 34rem),
+            linear-gradient(180deg, #050608 0%, #090b10 48%, #020304 100%);
         color: var(--ink);
     }
     h1, h2, h3, h4, h5, h6, p, label, span {
@@ -69,7 +69,7 @@ st.markdown(
         letter-spacing: 0;
     }
     [data-testid="stSidebar"] {
-        background: #0b121f;
+        background: #07090d;
         border-right: 1px solid var(--line);
     }
     [data-testid="stSidebar"] * {
@@ -84,23 +84,24 @@ st.markdown(
     .hero {
         padding: clamp(1.25rem, 2.2vw, 2rem);
         background:
-            linear-gradient(135deg, rgba(6, 12, 22, .92), rgba(14, 77, 95, .8)),
+            linear-gradient(135deg, rgba(0, 0, 0, .92), rgba(9, 19, 28, .78)),
             url("https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=1600&q=80");
         background-size: cover;
         background-position: center;
-        border: 1px solid rgba(88, 211, 230, .25);
+        border: 1px solid rgba(0, 212, 255, .26);
         border-radius: 8px;
-        box-shadow: 0 22px 54px rgba(0, 0, 0, .32);
+        box-shadow: 0 22px 54px rgba(0, 0, 0, .46);
         margin-bottom: 18px;
     }
     .hero h1 {
+        color: #ffffff;
         font-size: clamp(1.8rem, 3vw, 3.25rem);
         line-height: 1.04;
         margin: 0 0 10px 0;
     }
     .hero p {
         max-width: 920px;
-        color: rgba(232, 238, 247, .82);
+        color: rgba(255, 255, 255, .88);
         margin: 0;
         font-size: 1.02rem;
     }
@@ -117,7 +118,7 @@ st.markdown(
         border-radius: 8px;
         padding: 16px 16px;
         min-height: 118px;
-        box-shadow: 0 16px 34px rgba(0, 0, 0, .24);
+        box-shadow: 0 16px 34px rgba(0, 0, 0, .34);
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -174,25 +175,26 @@ st.markdown(
         justify-content: center;
     }
     .stTabs [aria-selected="true"] {
-        background: #102d39;
-        border-color: rgba(88, 211, 230, .55);
+        background: #102633;
+        border-color: rgba(0, 212, 255, .55);
     }
     .stButton button,
     .stDownloadButton button {
-        background: #123849;
-        color: var(--ink);
-        border: 1px solid rgba(88, 211, 230, .42);
+        background: #102633;
+        color: #ffffff;
+        border: 1px solid rgba(0, 212, 255, .42);
         border-radius: 8px;
     }
     .stButton button:hover,
     .stDownloadButton button:hover {
-        background: #165166;
+        background: #164158;
         border-color: var(--accent);
     }
     div[data-baseweb="select"] > div,
     div[data-baseweb="input"] > div {
         background-color: var(--panel);
         color: var(--ink);
+        border-color: var(--line);
     }
     @media (max-width: 1180px) {
         .metric-grid {
@@ -257,14 +259,14 @@ def format_number(value, decimals=2):
 
 def dark_figure(figsize=(7, 4)):
     fig, ax = plt.subplots(figsize=figsize)
-    fig.patch.set_facecolor("#101827")
-    ax.set_facecolor("#101827")
-    ax.tick_params(colors="#c8d3e1")
-    ax.xaxis.label.set_color("#d9e3f0")
-    ax.yaxis.label.set_color("#d9e3f0")
-    ax.title.set_color("#e8eef7")
+    fig.patch.set_facecolor("#0d1016")
+    ax.set_facecolor("#0d1016")
+    ax.tick_params(colors="#c7d2df")
+    ax.xaxis.label.set_color("#e2e8f0")
+    ax.yaxis.label.set_color("#e2e8f0")
+    ax.title.set_color("#f1f5f9")
     for spine in ax.spines.values():
-        spine.set_color("#32455f")
+        spine.set_color("#303846")
     return fig, ax
 
 
@@ -502,8 +504,8 @@ def train_pipeline(features: pd.DataFrame, labels: pd.Series, test_size: float, 
 def plot_class_balance(labels: pd.Series):
     counts = labels.value_counts().sort_index()
     fig, ax = dark_figure((6.8, 4))
-    bars = ax.bar(["No Planet", "Exoplanet"], [counts.get(0, 0), counts.get(1, 0)], color=["#58d3e6", "#79f2a6"])
-    ax.bar_label(bars, color="#e8eef7", padding=3)
+    bars = ax.bar(["No Planet", "Exoplanet"], [counts.get(0, 0), counts.get(1, 0)], color=["#00d4ff", "#ffb547"])
+    ax.bar_label(bars, color="#f1f5f9", padding=3)
     ax.set_title("Class Balance")
     ax.set_ylabel("Rows")
     st.pyplot(fig, width="stretch")
@@ -511,19 +513,19 @@ def plot_class_balance(labels: pd.Series):
 
 def plot_light_curve(raw, processed, title):
     fig, ax = dark_figure((9, 3.5))
-    ax.plot(raw, color="#73879f", linewidth=0.9, alpha=0.8, label="Raw")
-    ax.plot(processed, color="#58d3e6", linewidth=1.5, label="Preprocessed")
+    ax.plot(raw, color="#7f8ea3", linewidth=0.9, alpha=0.85, label="Raw")
+    ax.plot(processed, color="#00d4ff", linewidth=1.5, label="Preprocessed")
     ax.set_title(title)
     ax.set_xlabel("Time index")
     ax.set_ylabel("Flux")
-    ax.legend(frameon=False, labelcolor="#d9e3f0")
+    ax.legend(frameon=False, labelcolor="#e2e8f0")
     st.pyplot(fig, width="stretch")
 
 
 def plot_variability(flux_df, labels):
     stats = pd.DataFrame({"Flux std": flux_df.std(axis=1), "Label": labels.map({0: "No Planet", 1: "Exoplanet"})})
     fig, ax = dark_figure((6.8, 4))
-    sns.boxplot(data=stats, x="Label", y="Flux std", ax=ax, palette=["#58d3e6", "#79f2a6"], hue="Label", legend=False)
+    sns.boxplot(data=stats, x="Label", y="Flux std", ax=ax, palette=["#00d4ff", "#ffb547"], hue="Label", legend=False)
     ax.set_title("Flux Variability by Class")
     st.pyplot(fig, width="stretch")
 
@@ -557,7 +559,7 @@ def plot_feature_importance(model, features):
         .sort_values("Importance")
     )
     fig, ax = dark_figure((7, 4.8))
-    ax.barh(top["Feature"], top["Importance"], color="#58d3e6")
+    ax.barh(top["Feature"], top["Importance"], color="#00d4ff")
     ax.set_title("Top Engineered Features")
     ax.set_xlabel("Importance")
     st.pyplot(fig, width="stretch")
