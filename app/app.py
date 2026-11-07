@@ -47,21 +47,23 @@ st.markdown(
     """
     <style>
     :root {
-        --bg: #050608;
-        --panel: #0d1016;
-        --panel-2: #151922;
-        --ink: #f1f5f9;
-        --muted: #9aa7b7;
-        --line: #252b36;
-        --accent: #00d4ff;
-        --accent-2: #ffb547;
-        --danger: #ff5d5d;
-        --warn: #f3c258;
+        --bg: #080D16;
+        --panel: #101927;
+        --panel-2: #162235;
+        --ink: #F3F7FC;
+        --muted: #A8B6C8;
+        --line: #26364B;
+        --accent: #55D6E8;
+        --accent-2: #F2B45F;
+        --success: #70D6A4;
+        --danger: #FF7885;
+        --warn: #F2B45F;
     }
     .stApp {
         background:
-            radial-gradient(circle at top left, rgba(0, 212, 255, .12), transparent 34rem),
-            linear-gradient(180deg, #050608 0%, #090b10 48%, #020304 100%);
+            radial-gradient(circle at 8% 0%, rgba(85, 214, 232, .12), transparent 34rem),
+            radial-gradient(circle at 96% 18%, rgba(97, 123, 204, .08), transparent 28rem),
+            linear-gradient(180deg, #080D16 0%, #0B1320 54%, #080D16 100%);
         color: var(--ink);
     }
     h1, h2, h3, h4, h5, h6, p, label, span {
@@ -69,7 +71,7 @@ st.markdown(
         letter-spacing: 0;
     }
     [data-testid="stSidebar"] {
-        background: #07090d;
+        background: #0A111D;
         border-right: 1px solid var(--line);
     }
     [data-testid="stSidebar"] * {
@@ -84,11 +86,11 @@ st.markdown(
     .hero {
         padding: clamp(1.25rem, 2.2vw, 2rem);
         background:
-            linear-gradient(135deg, rgba(0, 0, 0, .92), rgba(9, 19, 28, .78)),
+            linear-gradient(110deg, rgba(8, 13, 22, .96) 0%, rgba(12, 24, 39, .86) 58%, rgba(12, 34, 48, .62) 100%),
             url("https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=1600&q=80");
         background-size: cover;
         background-position: center;
-        border: 1px solid rgba(0, 212, 255, .26);
+        border: 1px solid rgba(85, 214, 232, .28);
         border-radius: 8px;
         box-shadow: 0 22px 54px rgba(0, 0, 0, .46);
         margin-bottom: 18px;
@@ -175,19 +177,19 @@ st.markdown(
         justify-content: center;
     }
     .stTabs [aria-selected="true"] {
-        background: #102633;
-        border-color: rgba(0, 212, 255, .55);
+        background: #183447;
+        border-color: rgba(85, 214, 232, .62);
     }
     .stButton button,
     .stDownloadButton button {
-        background: #102633;
+        background: #183447;
         color: #ffffff;
-        border: 1px solid rgba(0, 212, 255, .42);
+        border: 1px solid rgba(85, 214, 232, .42);
         border-radius: 8px;
     }
     .stButton button:hover,
     .stDownloadButton button:hover {
-        background: #164158;
+        background: #21475A;
         border-color: var(--accent);
     }
     div[data-baseweb="select"] > div,
@@ -259,14 +261,14 @@ def format_number(value, decimals=2):
 
 def dark_figure(figsize=(7, 4)):
     fig, ax = plt.subplots(figsize=figsize)
-    fig.patch.set_facecolor("#0d1016")
-    ax.set_facecolor("#0d1016")
-    ax.tick_params(colors="#c7d2df")
-    ax.xaxis.label.set_color("#e2e8f0")
-    ax.yaxis.label.set_color("#e2e8f0")
-    ax.title.set_color("#f1f5f9")
+    fig.patch.set_facecolor("#101927")
+    ax.set_facecolor("#101927")
+    ax.tick_params(colors="#A8B6C8")
+    ax.xaxis.label.set_color("#DCE6F2")
+    ax.yaxis.label.set_color("#DCE6F2")
+    ax.title.set_color("#F3F7FC")
     for spine in ax.spines.values():
-        spine.set_color("#303846")
+        spine.set_color("#26364B")
     return fig, ax
 
 
@@ -504,8 +506,8 @@ def train_pipeline(features: pd.DataFrame, labels: pd.Series, test_size: float, 
 def plot_class_balance(labels: pd.Series):
     counts = labels.value_counts().sort_index()
     fig, ax = dark_figure((6.8, 4))
-    bars = ax.bar(["No Planet", "Exoplanet"], [counts.get(0, 0), counts.get(1, 0)], color=["#00d4ff", "#ffb547"])
-    ax.bar_label(bars, color="#f1f5f9", padding=3)
+    bars = ax.bar(["No Planet", "Exoplanet"], [counts.get(0, 0), counts.get(1, 0)], color=["#55D6E8", "#F2B45F"])
+    ax.bar_label(bars, color="#F3F7FC", padding=3)
     ax.set_title("Class Balance")
     ax.set_ylabel("Rows")
     st.pyplot(fig, width="stretch")
@@ -513,19 +515,19 @@ def plot_class_balance(labels: pd.Series):
 
 def plot_light_curve(raw, processed, title):
     fig, ax = dark_figure((9, 3.5))
-    ax.plot(raw, color="#7f8ea3", linewidth=0.9, alpha=0.85, label="Raw")
-    ax.plot(processed, color="#00d4ff", linewidth=1.5, label="Preprocessed")
+    ax.plot(raw, color="#70839B", linewidth=0.9, alpha=0.72, label="Raw")
+    ax.plot(processed, color="#55D6E8", linewidth=1.7, label="Preprocessed")
     ax.set_title(title)
     ax.set_xlabel("Time index")
     ax.set_ylabel("Flux")
-    ax.legend(frameon=False, labelcolor="#e2e8f0")
+    ax.legend(frameon=False, labelcolor="#DCE6F2")
     st.pyplot(fig, width="stretch")
 
 
 def plot_variability(flux_df, labels):
     stats = pd.DataFrame({"Flux std": flux_df.std(axis=1), "Label": labels.map({0: "No Planet", 1: "Exoplanet"})})
     fig, ax = dark_figure((6.8, 4))
-    sns.boxplot(data=stats, x="Label", y="Flux std", ax=ax, palette=["#00d4ff", "#ffb547"], hue="Label", legend=False)
+    sns.boxplot(data=stats, x="Label", y="Flux std", ax=ax, palette={"No Planet": "#55D6E8", "Exoplanet": "#F2B45F"}, hue="Label", legend=False)
     ax.set_title("Flux Variability by Class")
     st.pyplot(fig, width="stretch")
 
@@ -536,7 +538,7 @@ def plot_confusion(cm):
         cm,
         annot=True,
         fmt="d",
-        cmap="mako",
+        cmap="crest",
         xticklabels=["No Planet", "Exoplanet"],
         yticklabels=["No Planet", "Exoplanet"],
         ax=ax,
@@ -559,7 +561,7 @@ def plot_feature_importance(model, features):
         .sort_values("Importance")
     )
     fig, ax = dark_figure((7, 4.8))
-    ax.barh(top["Feature"], top["Importance"], color="#00d4ff")
+    ax.barh(top["Feature"], top["Importance"], color="#55D6E8")
     ax.set_title("Top Engineered Features")
     ax.set_xlabel("Importance")
     st.pyplot(fig, width="stretch")
