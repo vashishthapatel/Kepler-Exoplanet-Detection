@@ -47,23 +47,23 @@ st.markdown(
     """
     <style>
     :root {
-        --bg: #080D16;
-        --panel: #101927;
-        --panel-2: #162235;
-        --ink: #F3F7FC;
-        --muted: #A8B6C8;
-        --line: #26364B;
-        --accent: #55D6E8;
-        --accent-2: #F2B45F;
-        --success: #70D6A4;
-        --danger: #FF7885;
-        --warn: #F2B45F;
+        --bg: #090909;
+        --panel: #141311;
+        --panel-2: #201D17;
+        --ink: #F7F2E7;
+        --muted: #B9B09D;
+        --line: #393329;
+        --accent: #E6B84A;
+        --accent-2: #F4D783;
+        --success: #A9C99A;
+        --danger: #E47C70;
+        --warn: #F4D783;
     }
     .stApp {
         background:
-            radial-gradient(circle at 8% 0%, rgba(85, 214, 232, .12), transparent 34rem),
-            radial-gradient(circle at 96% 18%, rgba(97, 123, 204, .08), transparent 28rem),
-            linear-gradient(180deg, #080D16 0%, #0B1320 54%, #080D16 100%);
+            radial-gradient(circle at 8% 0%, rgba(230, 184, 74, .12), transparent 34rem),
+            radial-gradient(circle at 96% 18%, rgba(244, 215, 131, .06), transparent 28rem),
+            linear-gradient(180deg, #090909 0%, #11100D 54%, #090909 100%);
         color: var(--ink);
     }
     h1, h2, h3, h4, h5, h6, p, label, span {
@@ -71,7 +71,7 @@ st.markdown(
         letter-spacing: 0;
     }
     [data-testid="stSidebar"] {
-        background: #0A111D;
+        background: #0D0C0A;
         border-right: 1px solid var(--line);
     }
     [data-testid="stSidebar"] * {
@@ -86,11 +86,11 @@ st.markdown(
     .hero {
         padding: clamp(1.25rem, 2.2vw, 2rem);
         background:
-            linear-gradient(110deg, rgba(8, 13, 22, .96) 0%, rgba(12, 24, 39, .86) 58%, rgba(12, 34, 48, .62) 100%),
+            linear-gradient(110deg, rgba(9, 9, 9, .97) 0%, rgba(24, 22, 17, .88) 58%, rgba(55, 43, 20, .68) 100%),
             url("https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=1600&q=80");
         background-size: cover;
         background-position: center;
-        border: 1px solid rgba(85, 214, 232, .28);
+        border: 1px solid rgba(230, 184, 74, .36);
         border-radius: 8px;
         box-shadow: 0 22px 54px rgba(0, 0, 0, .46);
         margin-bottom: 18px;
@@ -177,19 +177,19 @@ st.markdown(
         justify-content: center;
     }
     .stTabs [aria-selected="true"] {
-        background: #183447;
-        border-color: rgba(85, 214, 232, .62);
+        background: #332A17;
+        border-color: rgba(230, 184, 74, .72);
     }
     .stButton button,
     .stDownloadButton button {
-        background: #183447;
+        background: #332A17;
         color: #ffffff;
-        border: 1px solid rgba(85, 214, 232, .42);
+        border: 1px solid rgba(230, 184, 74, .52);
         border-radius: 8px;
     }
     .stButton button:hover,
     .stDownloadButton button:hover {
-        background: #21475A;
+        background: #4A3A1D;
         border-color: var(--accent);
     }
     div[data-baseweb="select"] > div,
@@ -261,14 +261,14 @@ def format_number(value, decimals=2):
 
 def dark_figure(figsize=(7, 4)):
     fig, ax = plt.subplots(figsize=figsize)
-    fig.patch.set_facecolor("#101927")
-    ax.set_facecolor("#101927")
-    ax.tick_params(colors="#A8B6C8")
-    ax.xaxis.label.set_color("#DCE6F2")
-    ax.yaxis.label.set_color("#DCE6F2")
-    ax.title.set_color("#F3F7FC")
+    fig.patch.set_facecolor("#141311")
+    ax.set_facecolor("#141311")
+    ax.tick_params(colors="#B9B09D")
+    ax.xaxis.label.set_color("#E8E0CF")
+    ax.yaxis.label.set_color("#E8E0CF")
+    ax.title.set_color("#F7F2E7")
     for spine in ax.spines.values():
-        spine.set_color("#26364B")
+        spine.set_color("#393329")
     return fig, ax
 
 
@@ -506,8 +506,8 @@ def train_pipeline(features: pd.DataFrame, labels: pd.Series, test_size: float, 
 def plot_class_balance(labels: pd.Series):
     counts = labels.value_counts().sort_index()
     fig, ax = dark_figure((6.8, 4))
-    bars = ax.bar(["No Planet", "Exoplanet"], [counts.get(0, 0), counts.get(1, 0)], color=["#55D6E8", "#F2B45F"])
-    ax.bar_label(bars, color="#F3F7FC", padding=3)
+    bars = ax.bar(["No Planet", "Exoplanet"], [counts.get(0, 0), counts.get(1, 0)], color=["#A99B7A", "#E6B84A"])
+    ax.bar_label(bars, color="#F7F2E7", padding=3)
     ax.set_title("Class Balance")
     ax.set_ylabel("Rows")
     st.pyplot(fig, width="stretch")
@@ -515,19 +515,19 @@ def plot_class_balance(labels: pd.Series):
 
 def plot_light_curve(raw, processed, title):
     fig, ax = dark_figure((9, 3.5))
-    ax.plot(raw, color="#70839B", linewidth=0.9, alpha=0.72, label="Raw")
-    ax.plot(processed, color="#55D6E8", linewidth=1.7, label="Preprocessed")
+    ax.plot(raw, color="#8B8578", linewidth=0.9, alpha=0.72, label="Raw")
+    ax.plot(processed, color="#E6B84A", linewidth=1.7, label="Preprocessed")
     ax.set_title(title)
     ax.set_xlabel("Time index")
     ax.set_ylabel("Flux")
-    ax.legend(frameon=False, labelcolor="#DCE6F2")
+    ax.legend(frameon=False, labelcolor="#E8E0CF")
     st.pyplot(fig, width="stretch")
 
 
 def plot_variability(flux_df, labels):
     stats = pd.DataFrame({"Flux std": flux_df.std(axis=1), "Label": labels.map({0: "No Planet", 1: "Exoplanet"})})
     fig, ax = dark_figure((6.8, 4))
-    sns.boxplot(data=stats, x="Label", y="Flux std", ax=ax, palette={"No Planet": "#55D6E8", "Exoplanet": "#F2B45F"}, hue="Label", legend=False)
+    sns.boxplot(data=stats, x="Label", y="Flux std", ax=ax, palette={"No Planet": "#A99B7A", "Exoplanet": "#E6B84A"}, hue="Label", legend=False)
     ax.set_title("Flux Variability by Class")
     st.pyplot(fig, width="stretch")
 
@@ -538,7 +538,7 @@ def plot_confusion(cm):
         cm,
         annot=True,
         fmt="d",
-        cmap="crest",
+        cmap="YlOrBr",
         xticklabels=["No Planet", "Exoplanet"],
         yticklabels=["No Planet", "Exoplanet"],
         ax=ax,
@@ -561,7 +561,7 @@ def plot_feature_importance(model, features):
         .sort_values("Importance")
     )
     fig, ax = dark_figure((7, 4.8))
-    ax.barh(top["Feature"], top["Importance"], color="#55D6E8")
+    ax.barh(top["Feature"], top["Importance"], color="#E6B84A")
     ax.set_title("Top Engineered Features")
     ax.set_xlabel("Importance")
     st.pyplot(fig, width="stretch")
